@@ -27,7 +27,7 @@ def main():
         STR = reader.fieldnames[i]
         STRs.append(STR)
 
-    # Contando o maximo de repetições consecutivas de um STR
+    # Contando o maximo de repetições consecutivas de um STR da sequencia completa
     seq = {}
     for STR in STRs:
         seq[STR] = verify_dna(STR_seq, STR)
@@ -38,14 +38,10 @@ def main():
 
         # Iteragindo com cada pessoa especificamente
         for STR in people:
-
             if STR != 'name':
 
-                seq_valor = int(seq[STR])
-                str_valor = int(people[STR])
-
                 # Verificando se determinado STR é igual
-                if seq_valor == str_valor:
+                if int(seq[STR]) == int(people[STR]):
                     matches += 1
 
                 if matches == (len(reader.fieldnames) - 1):
@@ -55,10 +51,9 @@ def main():
     print("No match")
 
 # Função que retorna o numero maximo de repetiçoes de um STR
-
-
 def verify_dna(STR_seq, STR):
 
+    #Definindo contador fora do looping pra que não seja resetado.
     max_count = 0
 
     for i in range(len(STR_seq)):
@@ -74,6 +69,7 @@ def verify_dna(STR_seq, STR):
                 k += len(STR)
 
                 # Guardando o valor maximo e depois resetando o valor da contagem
+                # pois apenas interessa a maiior sequencia consecutiva do STR
                 if STR_count > max_count:
                     max_count = STR_count
 
